@@ -1,80 +1,69 @@
-"""Simple superhero utilities."""
-
-
 class Superhero:
-    def __init__(self, name, powers, origin, friends, age, alignment):
+    def __init__(self, name, powers, origin, friends, age, is_good=True):
         self.name = name
         self.powers = list(powers)
         self.origin = origin
         self.friends = friends
         self.age = age
-        self.alignment = alignment
+        self.is_good = is_good
         self.energy = 100
 
     def print_name(self):
-        print(self.name)
+        alignment = "Gentil" if self.is_good else "Méchant"
+        print(f"Nom: {self.name} [{alignment}]")
 
     def print_attributes(self):
-        print("Superhero attributes are:")
-        print(self.name)
-        print(self.powers)
-        print(self.origin)
-        print(self.friends)
-        print(self.age)
-        print(self.alignment)
+        alignment = "Gentil" if self.is_good else "Méchant"
+        print(f"\n--- Fiche de {self.name} ---")
+        print(f"Alignement : {alignment}")
+        print(f"Pouvoirs   : {', '.join(self.powers)}")
+        print(f"Origine    : {self.origin}")
+        print(f"Amis       : {self.friends}")
+        print(f"Âge        : {self.age}")
+        print(f"Énergie    : {self.energy}/100")
 
     def add_power(self, power):
         if power not in self.powers:
             self.powers.append(power)
 
-    def fly(self):
-        self.add_power("Flight")
-        self.energy -= 50
-        print(f"{self.name} takes off into the sky")
-
-    def turn_invisible(self):
-        if self.energy >= 1:
-            self.add_power("Invisibility")
-            self.energy -= 1
-            print(f"{self.name} becomes completely invisible")
-
-    def super_strength(self):
-        if self.energy >= 10:
-            self.add_power("Super Strength")
-            self.energy -= 10
-            print(f"{self.name} becomes strong")
-
-    def teleportation(self):
-        if self.energy >= 10:
-            self.add_power("Teleportation")
-            self.energy -= 10
-            print(f"{self.name} instantly teleports")
-
-    def shoot_lasers(self):
-        if self.energy >= 20:
-            self.add_power("Shoot Lasers")
-            self.energy -= 20
-            print(f"{self.name} shoots lasers from eyes")
+    def control_gravity(self):
+        if self.energy >= 30:
+            self.add_power("Contrôle Gravitationnel")
+            self.energy -= 30
+            print(f"{self.name} manipule la gravité !")
+        else:
+            print(f"{self.name} manque d'énergie.")
 
     def time_travel(self):
-        if self.energy >= 30:
-            self.add_power("Time Travel")
-            self.energy -= 30
-            print(f"{self.name} travels through time")
+        if self.energy >= 80:
+            self.add_power("Voyage Temporel")
+            self.energy -= 80
+            print(f"{self.name} voyage dans le temps !")
+        else:
+            print(f"{self.name} n'a pas assez d'énergie.")
 
-    def heal(self):
+    def control_spiders(self):
         if self.energy >= 15:
-            self.add_power("Healing")
+            self.add_power("Contrôle des araignées")
             self.energy -= 15
-            print(f"{self.name} heals rapidly")
+            print(f"{self.name} commande aux araignées !")
 
-# Example usage
+    def symbiote_morph(self):
+        if self.energy >= 25:
+            self.add_power("Métamorphose Symbiotique")
+            self.energy -= 25
+            print(f"Le symbiote de {self.name} change de forme !")
+
+
 if __name__ == "__main__":
-    ironman = Superhero("IronMan", ["tech"], "Earth", "Pepper", 35)
-    thor = Superhero("Thor", ["Lightning", "Strength"], "Asgard", ["Loki"], 1500, "Hero")
-    loki = Superhero("Loki", ["Magic", "Illusion"], "Jotunheim", ["Thor"], 1050, "Anti-Hero")
-    ironman.print_name()
-    ironman.print_attributes()
-    ironman.fly()
+    scarlet_spider = Superhero("Scarlet Spider", ["Agilité"], "Clone", "Peter Parker", 25, True)
+    agent_venom = Superhero("Agent Venom", ["Force"], "Militaire", "Flash Thompson", 30, True)
 
+    scarlet_spider.control_spiders()
+    scarlet_spider.control_gravity()
     
+    agent_venom.symbiote_morph()
+    agent_venom.time_travel()
+
+    scarlet_spider.print_attributes()
+    agent_venom.print_attributes()
